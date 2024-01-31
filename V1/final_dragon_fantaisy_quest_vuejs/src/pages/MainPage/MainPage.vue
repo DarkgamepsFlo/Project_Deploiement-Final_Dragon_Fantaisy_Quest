@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <MessageComponent></MessageComponent>
-    <PointDeVie :type="'Joueur'" @decrement="handleDecrement" :degat="DegatJoueur"/>
-    <PointDeVie :type="'Ennemi'" @decrement="handleDecrement" :degat="DegatEnnemi"/>
+  <div class="app-container">
+    <div class="points-de-vie-container">
+      <PointDeVie :type="'Joueur'" @decrement="handleDecrement" :degat="DegatJoueur"/>
+      <PointDeVie :type="'Ennemi'" @decrement="handleDecrement" :degat="DegatEnnemi"/>
+    </div>
+    <BarreAction></BarreAction>
   </div>
 </template>
 
 <script>
-import MessageComponent from '../../components/MessageComponent/MessageComponent.vue';
 import PointDeVie from '../../components/PointsDeVieUpdate.vue';
+import BarreAction from '../../components/BarreAction/BarreAction.vue'
 
 export default {
   data() {
@@ -19,7 +21,7 @@ export default {
   },
   components: {
     PointDeVie,
-    MessageComponent,
+    BarreAction,
   },
   methods: {
     handleDecrement(type) {
@@ -39,12 +41,19 @@ export default {
 </script>
 
 <style>
-#app {
+.app-container {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-image: url('../../assets/background.jpg');
+  background-size: cover;
+  background-position: bottom; /* Ajout de la propriété background-position */
+  height: 100vh; /* 100% de la hauteur de la fenêtre */
+  margin: 0;
+}
+
+.points-de-vie-container {
+  display: flex;
+  /* Ajoutez d'autres styles selon vos besoins */
 }
 </style>  

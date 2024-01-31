@@ -104,4 +104,3 @@ export default {
   background-color: lightcoral;
 }
 </style>
-

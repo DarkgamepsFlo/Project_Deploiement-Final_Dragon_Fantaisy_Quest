@@ -1,5 +1,4 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
   <MainPage></MainPage>
 </template>
 
@@ -15,4 +14,7 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0%;
+}
 </style>
