@@ -45,9 +45,9 @@
       },
       decrementerPointsDeVie(character) {
         if (character == "joueur") {
-          this.pointsDeVieJoueur -= 10
+          this.pointsDeVieEnnemi -= 10
         } else if (character == "ennemi") {
-          this.pointsDeVieEnnemi -= 8
+          this.pointsDeVieJoueur -= 8
         }
       }
     },

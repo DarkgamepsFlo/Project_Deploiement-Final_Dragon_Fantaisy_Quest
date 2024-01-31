@@ -7,5 +7,5 @@
   </div>
 </template>
 
-<script src="../Message.js"></script>
-<style src="./Message.css"></style>
+<script src="./MessageComponent.js"></script>
+<style src="./MessageComponent.css"></style>
