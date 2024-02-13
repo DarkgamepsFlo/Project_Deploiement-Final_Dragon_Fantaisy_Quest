@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <div class="points-de-vie-container">
-      <PointDeVie :type="'Joueur'" @decrement="handleDecrement" :degat="DegatJoueur" :img="'Tifa.png'"/>
+      <PointDeVie :type="'Joueur'" :img="'Tifa.png'"/>
       <PointDeVie :type="'Ennemi'" @decrement="handleDecrement" :degat="DegatEnnemi" :img="'Sephiroth.png'"/>
     </div>
-    <BarreAction @decrement="handleDecrement"></BarreAction>
+    <BarreAction :type="'Joueur'" @decrement="handleDecrement" :degat="DegatJoueur"></BarreAction>
   </div>
 </template>
 

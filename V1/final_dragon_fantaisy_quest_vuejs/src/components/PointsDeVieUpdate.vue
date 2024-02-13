@@ -1,14 +1,12 @@
 <template>
   <div class="points-section">
-    <!-- Titre indiquant le type de points de vie (Joueur ou Ennemi) -->
-    <h2>Points de vie {{ type }}</h2>
 
     <img :src="require('@/assets/' + img)" alt="Description de l'image">
 
     <!-- Affichage des points de vie actuels -->
-    <p>PV : {{ pointsDeVie }}</p>
+    <p v-if="localType == 'Ennemi'">PV : {{ pointsDeVie }}</p>
 
-    <p>Dégâts reçus : {{ degat }}</p>
+    <p v-if="localType == 'Ennemi'">Dégâts reçus : {{ degat }}</p>
 
   </div>
 </template>
@@ -66,7 +64,6 @@ export default {
     async decrementerPointsDeVie() {
       // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
       this.$emit('decrement', this.localType);
-
     },
     handleDegatChange(newValue) {
       // Réagit lorsque la propriété degat est modifiée
@@ -79,7 +76,7 @@ export default {
         setTimeout(() => {
           console.log("je décrémente les PV du joueur");
           this.decrementerPointsDeVie();
-        }, 5000);
+        }, 3000);
       }
     },
   },
