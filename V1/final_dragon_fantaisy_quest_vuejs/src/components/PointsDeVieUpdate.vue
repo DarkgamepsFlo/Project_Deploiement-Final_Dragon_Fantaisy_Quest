@@ -1,15 +1,15 @@
 <template>
-  <div class="points-section" :class="sectionClass">
+  <div class="points-section">
     <!-- Titre indiquant le type de points de vie (Joueur ou Ennemi) -->
     <h2>Points de vie {{ type }}</h2>
-    <!-- Affichage des points de vie actuels -->
-    <p>{{ pointsDeVie }}</p>
 
-    <h2>{{ title }}</h2>
+    <img :src="require('@/assets/' + img)" alt="Description de l'image">
+
+    <!-- Affichage des points de vie actuels -->
+    <p>PV : {{ pointsDeVie }}</p>
+
     <p>Dégâts reçus : {{ degat }}</p>
 
-    <!-- Bouton pour décrémenter les points de vie -->
-    <button @click="decrementerPointsDeVie">Décrémenter {{ type }}</button>
   </div>
 </template>
 
@@ -35,23 +35,15 @@ export default {
       type: Number,
       default: 0,
     },
+    img: {
+      type: String,
+      default: null,
+    },
   },
   mounted() {
     // Méthode appelée automatiquement après que le composant est monté dans le DOM
     // Elle effectue une requête à l'API pour récupérer les points de vie initiaux
     this.fetchPointsDeVie();
-  },
-  computed: {
-    // Calcul dynamique de la classe CSS en fonction du type (Joueur ou Ennemi)
-    sectionClass() {
-      return {
-        'joueur-section': this.localType === 'Joueur',
-        'ennemi-section': this.localType === 'Ennemi',
-      };
-    },
-    title() {
-      return this.degat > 0 ? 'Joueur blessé' : 'Joueur en forme';
-    },
   },
   watch: {
     degat: 'handleDegatChange', // Utilise la méthode handleDegatChange pour réagir aux changements
@@ -92,15 +84,5 @@ export default {
   flex: 1;
   margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.joueur-section {
-  background-color: lightgreen;
-}
-
-.ennemi-section {
-  background-color: lightcoral;
 }
 </style>

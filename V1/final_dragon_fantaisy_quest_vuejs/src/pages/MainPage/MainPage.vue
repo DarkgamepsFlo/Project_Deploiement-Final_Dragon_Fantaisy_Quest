@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <div class="points-de-vie-container">
-      <PointDeVie :type="'Joueur'" @decrement="handleDecrement" :degat="DegatJoueur"/>
-      <PointDeVie :type="'Ennemi'" @decrement="handleDecrement" :degat="DegatEnnemi"/>
+      <PointDeVie :type="'Joueur'" @decrement="handleDecrement" :degat="DegatJoueur" :img="'Tifa.png'"/>
+      <PointDeVie :type="'Ennemi'" @decrement="handleDecrement" :degat="DegatEnnemi" :img="'Sephiroth.png'"/>
     </div>
-    <BarreAction></BarreAction>
+    <BarreAction @decrement="handleDecrement"></BarreAction>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
 .app-container {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
-  color: #2c3e50;
+  color: #ffffff;
   background-image: url('../../assets/background.jpg');
   background-size: cover;
   background-position: bottom; /* Ajout de la propriété background-position */
