@@ -7,6 +7,7 @@ export default {
       pointsDeVieBase: null,
       pointsDeVie: null,
       localType: this.type,
+      isButtonDisabled: false,
     };
   },
   props: {
@@ -31,8 +32,16 @@ export default {
   methods: {
     // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie
     async decrementerPointsDeVie() {
-      // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
-      this.$emit('decrement', 'Joueur');
+      if (!this.isButtonDisabled) {
+        this.isButtonDisabled = true; // Désactive le bouton
+        
+        // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
+        this.$emit('decrement', 'Joueur');
+
+        setTimeout(() => {
+          this.isButtonDisabled = false; // Réactive le bouton après 3 secondes
+        }, 3000);
+      }
     },
     async fetchPointsDeVie() {
       try {

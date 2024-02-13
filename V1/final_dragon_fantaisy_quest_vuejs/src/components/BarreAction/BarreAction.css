@@ -1,7 +1,7 @@
 .barre-action {
     height: 120px; /* Ajoutez la hauteur souhaitée de votre div */
     background: linear-gradient(to bottom right, #0100AB, #040127);
-    border: #c5c5c5 5px solid;
+    border: #8a8a8a 5px solid;
     border-radius: 20px;
 }
 
