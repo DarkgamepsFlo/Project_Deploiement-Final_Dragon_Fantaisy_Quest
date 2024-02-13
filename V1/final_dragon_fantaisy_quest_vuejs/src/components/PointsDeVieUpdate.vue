@@ -71,8 +71,16 @@ export default {
     handleDegatChange(newValue) {
       // Réagit lorsque la propriété degat est modifiée
       console.log(`Nouveaux dégâts : ${newValue}`);
-      // Tu peux ajouter ici le code nécessaire pour gérer le changement des dégâts
-      this.pointsDeVie -= newValue;
+      
+      if (this.type === "Joueur"){
+        this.pointsDeVie -= newValue;
+      } else {
+        this.pointsDeVie -= newValue;
+        setTimeout(() => {
+          console.log("je décrémente les PV du joueur");
+          this.decrementerPointsDeVie();
+        }, 5000);
+      }
     },
   },
 };

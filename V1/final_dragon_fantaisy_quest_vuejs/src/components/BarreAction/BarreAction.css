@@ -5,6 +5,14 @@
     border-radius: 20px;
 }
 
+.barre-life {
+    width: 600px;
+}
+
+.barre-attack {
+    width: 1500px;
+}
+
 .h1-barre-action {
     margin: 0%;
 }
@@ -15,4 +23,6 @@
     width: 100%; /* Assure que la barre prend toute la largeur de l'écran */
     z-index: 1; /* Assure que la barre est au-dessus du reste du contenu */
     background-color: black;
+
+    display: flex;
 }
