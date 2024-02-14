@@ -63,7 +63,7 @@ export default {
     // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie
     async decrementerPointsDeVie() {
       // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
-      this.$emit('decrement', this.localType);
+      this.$emit('decrement', this.localType, 10);
     },
     handleDegatChange(newValue) {
       // Réagit lorsque la propriété degat est modifiée
@@ -72,7 +72,9 @@ export default {
       if (this.type === "Joueur"){
         this.pointsDeVie -= newValue;
       } else {
-        this.pointsDeVie -= newValue;
+        if (newValue !== -1){
+          this.pointsDeVie -= newValue;
+        }
         setTimeout(() => {
           console.log("je décrémente les PV du joueur");
           this.decrementerPointsDeVie();

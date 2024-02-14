@@ -31,13 +31,26 @@ export default {
   },
   methods: {
     // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie
-    async decrementerPointsDeVie() {
+    async decrementerPointsDeVie(name) {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true; // Désactive le bouton
         
-        // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
-        this.$emit('decrement', 'Joueur');
-
+        if(name == 'Punch'){
+          // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
+          this.$emit('decrement', 'Joueur', 8);
+        } else if(name == 'Magic_Attack'){
+          this.$emit('decrement', 'Joueur', 12);
+        } else if(name == 'Heal') {
+          if (this.pointsDeVie > this.pointsDeVieBase - 5){
+            this.pointsDeVie = this.pointsDeVieBase;
+          } else {
+            this.pointsDeVie += 5
+          }
+          this.$emit('decrement', 'Joueur', -1);
+        }else {
+          this.$emit('decrement', 'Joueur', 0);
+        }
+        
         setTimeout(() => {
           this.isButtonDisabled = false; // Réactive le bouton après 3 secondes
         }, 3000);
