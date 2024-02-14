@@ -1,15 +1,13 @@
 <template>
-  <div class="points-section" :class="sectionClass">
-    <!-- Titre indiquant le type de points de vie (Joueur ou Ennemi) -->
-    <h2>Points de vie {{ type }}</h2>
+  <div class="points-section">
+
+    <img :src="require('@/assets/' + img)" alt="Description de l'image">
+
     <!-- Affichage des points de vie actuels -->
-    <p>{{ pointsDeVie }}</p>
+    <p v-if="localType == 'Ennemi'">PV : {{ pointsDeVie }}</p>
 
-    <h2>{{ title }}</h2>
-    <p>Dégâts reçus : {{ degat }}</p>
+    <p v-if="localType == 'Ennemi'">Dégâts reçus : {{ degat }}</p>
 
-    <!-- Bouton pour décrémenter les points de vie -->
-    <button @click="decrementerPointsDeVie">Décrémenter {{ type }}</button>
   </div>
 </template>
 
@@ -35,23 +33,15 @@ export default {
       type: Number,
       default: 0,
     },
+    img: {
+      type: String,
+      default: null,
+    },
   },
   mounted() {
     // Méthode appelée automatiquement après que le composant est monté dans le DOM
     // Elle effectue une requête à l'API pour récupérer les points de vie initiaux
     this.fetchPointsDeVie();
-  },
-  computed: {
-    // Calcul dynamique de la classe CSS en fonction du type (Joueur ou Ennemi)
-    sectionClass() {
-      return {
-        'joueur-section': this.localType === 'Joueur',
-        'ennemi-section': this.localType === 'Ennemi',
-      };
-    },
-    title() {
-      return this.degat > 0 ? 'Joueur blessé' : 'Joueur en forme';
-    },
   },
   watch: {
     degat: 'handleDegatChange', // Utilise la méthode handleDegatChange pour réagir aux changements
@@ -73,14 +63,23 @@ export default {
     // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie
     async decrementerPointsDeVie() {
       // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
-      this.$emit('decrement', this.localType);
-
+      this.$emit('decrement', this.localType, 10);
     },
     handleDegatChange(newValue) {
       // Réagit lorsque la propriété degat est modifiée
       console.log(`Nouveaux dégâts : ${newValue}`);
-      // Tu peux ajouter ici le code nécessaire pour gérer le changement des dégâts
-      this.pointsDeVie -= newValue;
+      
+      if (this.type === "Joueur"){
+        this.pointsDeVie -= newValue;
+      } else {
+        if (newValue !== -1){
+          this.pointsDeVie -= newValue;
+        }
+        setTimeout(() => {
+          console.log("je décrémente les PV du joueur");
+          this.decrementerPointsDeVie();
+        }, 3000);
+      }
     },
   },
 };
@@ -92,15 +91,5 @@ export default {
   flex: 1;
   margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.joueur-section {
-  background-color: lightgreen;
-}
-
-.ennemi-section {
-  background-color: lightcoral;
 }
 </style>

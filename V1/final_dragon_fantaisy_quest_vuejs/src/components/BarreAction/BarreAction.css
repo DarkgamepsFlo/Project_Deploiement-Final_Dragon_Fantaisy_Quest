@@ -1,18 +1,28 @@
 .barre-action {
     height: 120px; /* Ajoutez la hauteur souhaitée de votre div */
     background: linear-gradient(to bottom right, #0100AB, #040127);
-    border: #c5c5c5 5px solid;
+    border: #8a8a8a 5px solid;
     border-radius: 20px;
-    position: fixed;
-    bottom: 0;
-    width: 99.4%; /* Assure que la barre prend toute la largeur de l'écran */
-    z-index: 999; /* Assure que la barre est au-dessus du reste du contenu */
 }
 
-.back-barre-action {
-    background-color: black;
+.barre-life {
+    width: 600px;
+}
+
+.barre-attack {
+    width: 1500px;
 }
 
 .h1-barre-action {
     margin: 0%;
+}
+
+.back-barre-action {
+    position: fixed;
+    bottom: 0;
+    width: 100%; /* Assure que la barre prend toute la largeur de l'écran */
+    z-index: 1; /* Assure que la barre est au-dessus du reste du contenu */
+    background-color: black;
+
+    display: flex;
 }

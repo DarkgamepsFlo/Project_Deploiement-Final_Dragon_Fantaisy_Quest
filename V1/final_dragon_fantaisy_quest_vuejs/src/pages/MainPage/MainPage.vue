@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <div class="points-de-vie-container">
-      <PointDeVie :type="'Joueur'" @decrement="handleDecrement" :degat="DegatJoueur"/>
-      <PointDeVie :type="'Ennemi'" @decrement="handleDecrement" :degat="DegatEnnemi"/>
+      <PointDeVie :type="'Joueur'" :img="'Tifa.png'"/>
+      <PointDeVie :type="'Ennemi'" @decrement="handleDecrement" :degat="DegatEnnemi" :img="'Sephiroth.png'"/>
     </div>
-    <BarreAction></BarreAction>
+    <BarreAction :type="'Joueur'" @decrement="handleDecrement" :degat="DegatJoueur"></BarreAction>
   </div>
 </template>
 
@@ -24,16 +24,16 @@ export default {
     BarreAction,
   },
   methods: {
-    handleDecrement(type) {
+    handleDecrement(type, power) {
       // Logique pour décrémenter les points de vie de l'autre composant
       if (type === 'Joueur') {
         console.log("Envoyer -8 au composant enfant de type Ennemi");
-        this.DegatEnnemi = 8;
+        this.DegatEnnemi = power;
         this.DegatJoueur = 0;
       } else if (type === 'Ennemi') {
         console.log("Envoyer -10 au composant enfant de type Joueur");
         this.DegatEnnemi = 0;
-        this.DegatJoueur = 10;
+        this.DegatJoueur = power;
       }
     },
   },
@@ -44,7 +44,7 @@ export default {
 .app-container {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
-  color: #2c3e50;
+  color: #ffffff;
   background-image: url('../../assets/background.jpg');
   background-size: cover;
   background-position: bottom; /* Ajout de la propriété background-position */
