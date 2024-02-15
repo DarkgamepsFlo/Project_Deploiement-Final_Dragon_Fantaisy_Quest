@@ -3,7 +3,7 @@
     "decrementer": { 
         "decrement": "decrement", 
         "Joueur": "Joueur", 
-        "damage": 10,
+        "damage": 8,
         "isButtonDisabled": true
     }
 }
