@@ -1,4 +1,6 @@
 import fetchPointsDeVieService from "@/services/fetchPointsDeVieService";
+import decrementerPointsDeVieService from "@/services/decrementerPointsDeVieService";
+import handleDegatChangeService from "@/services/handleDegatChangeService";
 
 export default {
   name: 'BarreAction',
@@ -35,39 +37,33 @@ export default {
     async decrementerPointsDeVie(name) {
       if (!this.isButtonDisabled) {
         this.isButtonDisabled = true; // Désactive le bouton
+
+        const int_result = await decrementerPointsDeVieService.decrementerPointsDeVie(this.localType, name);
         
-        if(name == 'Punch'){
-          // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
-          this.$emit('decrement', 'Joueur', 8);
-        } else if(name == 'Magic_Attack'){
-          this.$emit('decrement', 'Joueur', 12);
-        } else if(name == 'Heal') {
-          if (this.pointsDeVie > this.pointsDeVieBase - 5){
+        if (int_result === -1){
+          if (this.pointsDeVie > this.pointsDeVieBase - 5)
             this.pointsDeVie = this.pointsDeVieBase;
-          } else {
+          else
             this.pointsDeVie += 5
-          }
-          this.$emit('decrement', 'Joueur', -1);
-        }else {
-          this.$emit('decrement', 'Joueur', 0);
         }
-        
+
+        this.$emit('decrement', this.localType, int_result);
+
         setTimeout(() => {
           this.isButtonDisabled = false; // Réactive le bouton après 3 secondes
         }, 3000);
       }
     },
-    handleDegatChange(newValue) {
-      // Réagit lorsque la propriété degat est modifiée
-      console.log(`Nouveaux dégâts : ${newValue}`);
+
+    async handleDegatChange(newValue) {
       
-      if (this.type === "Joueur"){
-        this.pointsDeVie -= newValue;
-      } else {
-        this.pointsDeVie -= newValue;
+      var [pv_result, second_result] = await handleDegatChangeService.handleDegatChange(this.localType, this.pointsDeVie, newValue)
+      
+      this.pointsDeVie = pv_result;
+
+      if (second_result > 0){
         setTimeout(() => {
-          console.log("je décrémente les PV du joueur");
-          this.decrementerPointsDeVie();
+          this.decrementerPointsDeVie(this.localType, 'Attack');
         }, 5000);
       }
     },

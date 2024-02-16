@@ -1,4 +1,6 @@
 import fetchPointsDeVieService from "@/services/fetchPointsDeVieService";
+import decrementerPointsDeVieService from "@/services/decrementerPointsDeVieService";
+import handleDegatChangeService from "@/services/handleDegatChangeService";
 
 export default {
   data() {
@@ -34,23 +36,20 @@ export default {
   methods: {
     // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie
     async decrementerPointsDeVie() {
-      // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
-      this.$emit('decrement', this.localType, 10);
+      const int_result = await decrementerPointsDeVieService.decrementerPointsDeVie(this.localType, null);
+      this.$emit('decrement', this.localType, int_result);
     },
-    handleDegatChange(newValue) {
+
+    async handleDegatChange(newValue) {
       // Réagit lorsque la propriété degat est modifiée
-      console.log(`Nouveaux dégâts : ${newValue}`);
-      
-      if (this.type === "Joueur"){
-        this.pointsDeVie -= newValue;
-      } else {
-        if (newValue !== -1){
-          this.pointsDeVie -= newValue;
-        }
+      var [pv_result, second_result] = await handleDegatChangeService.handleDegatChange(this.localType, this.pointsDeVie, newValue);
+
+      this.pointsDeVie = pv_result;
+
+      if (second_result > 0){
         setTimeout(() => {
-          console.log("je décrémente les PV du joueur");
-          this.decrementerPointsDeVie();
-        }, 3000);
+          this.decrementerPointsDeVie('Attack');
+        }, 5000);
       }
     },
   },

@@ -5,7 +5,6 @@ class fetchPointsDeVieService{
   // Cette méthode permet d'ajouter une boite dans la liste de suggestion
   async fetchPointsDeVieAPI(perso) {
     const response = await getPointsDeVieService.getPointsDeVieAPI(perso);
-    console.log(response)
     const name_var = "pv_" + perso.toLowerCase();
     const pointsDeVie = response[name_var];
     return pointsDeVie;
