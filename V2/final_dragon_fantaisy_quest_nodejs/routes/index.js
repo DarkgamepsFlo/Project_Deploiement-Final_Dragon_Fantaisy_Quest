@@ -2,6 +2,8 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const conf = require('../conf.json');
+const joueur = require('../services/db/database_joueur.json');
+const ennemi = require('../services/db/database_ennemi.json');
 
 // Utilisez le middleware cors avec l'origine autorisée
 const corsOptions = {
@@ -19,11 +21,31 @@ app.get('/', (req, res) => {
 
 app.get('/api/pointsDeVie', (req, res) => {
     try {
-      console.log(conf.joueur.pointsDeVie);
-      console.log(conf.ennemi.pointsDeVie);
       return res.send({
         joueur: conf.joueur.pointsDeVie,
         ennemi: conf.ennemi.pointsDeVie
+      });
+    } catch (error) {
+      console.error('Erreur lors de la lecture du fichier de configuration', error);
+      res.status(500).json({ error: 'Erreur serveur' });
+    }
+  });
+
+  app.get('/api/pointsDeVieJoueur', (req, res) => {
+    try {
+      return res.send({
+        pv_joueur: joueur.pointsDeVie,
+      });
+    } catch (error) {
+      console.error('Erreur lors de la lecture du fichier de configuration', error);
+      res.status(500).json({ error: 'Erreur serveur' });
+    }
+  });
+
+  app.get('/api/pointsDeVieEnnemi', (req, res) => {
+    try {
+      return res.send({
+        pv_ennemi: ennemi.pointsDeVie
       });
     } catch (error) {
       console.error('Erreur lors de la lecture du fichier de configuration', error);

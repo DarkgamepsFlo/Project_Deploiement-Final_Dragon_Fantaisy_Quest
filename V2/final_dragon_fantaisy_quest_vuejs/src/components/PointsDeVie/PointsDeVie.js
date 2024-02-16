@@ -1,19 +1,4 @@
-<template>
-  <div class="points-section">
-
-    <img :src="require('@/assets/' + img)" alt="Description de l'image">
-
-    <!-- Affichage des points de vie actuels -->
-    <p v-if="localType == 'Ennemi'">PV : {{ pointsDeVie }}</p>
-
-    <p v-if="localType == 'Ennemi'">Dégâts reçus : {{ degat }}</p>
-
-  </div>
-</template>
-
-
-<script>
-import axios from 'axios';
+import fetchPointsDeVieService from "@/services/fetchPointsDeVieService";
 
 export default {
   data() {
@@ -38,28 +23,15 @@ export default {
       default: null,
     },
   },
-  mounted() {
+  async mounted() {
     // Méthode appelée automatiquement après que le composant est monté dans le DOM
     // Elle effectue une requête à l'API pour récupérer les points de vie initiaux
-    this.fetchPointsDeVie();
+    this.pointsDeVie = await fetchPointsDeVieService.fetchPointsDeVieAPI(this.localType);
   },
   watch: {
     degat: 'handleDegatChange', // Utilise la méthode handleDegatChange pour réagir aux changements
   },
   methods: {
-    // Méthode asynchrone pour récupérer les points de vie depuis l'API
-    async fetchPointsDeVie() {
-      try {
-        // Utilisation d'Axios pour effectuer une requête GET à l'API
-        const response = await axios.get('http://localhost:3000/api/pointsDeVie');
-        // Accès aux données de la réponse et mise à jour des points de vie du composant
-        const data = response.data;
-        this.pointsDeVie = data[this.localType.toLowerCase()];
-      } catch (error) {
-        // Gestion des erreurs lors de la récupération des points de vie
-        console.error('Erreur lors de la récupération des points de vie', error);
-      }
-    },
     // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie
     async decrementerPointsDeVie() {
       // Émission d'un événement personnalisé vers le composant parent avec le type du composant actuel
@@ -83,13 +55,3 @@ export default {
     },
   },
 };
-</script>
-
-
-<style scoped>
-.points-section {
-  flex: 1;
-  margin: 10px;
-  padding: 10px;
-}
-</style>

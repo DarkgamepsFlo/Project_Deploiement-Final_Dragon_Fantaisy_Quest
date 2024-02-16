@@ -1,4 +1,4 @@
-import axios from 'axios';
+import fetchPointsDeVieService from "@/services/fetchPointsDeVieService";
 
 export default {
   name: 'BarreAction',
@@ -21,10 +21,11 @@ export default {
       default: 0,
     },
   },
-  mounted() {
+  async mounted() {
     // Méthode appelée automatiquement après que le composant est monté dans le DOM
     // Elle effectue une requête à l'API pour récupérer les points de vie initiaux
-    this.fetchPointsDeVie();
+    this.pointsDeVie = await fetchPointsDeVieService.fetchPointsDeVieAPI(this.localType);
+    this.pointsDeVieBase = this.pointsDeVie;
   },
   watch: {
     degat: 'handleDegatChange', // Utilise la méthode handleDegatChange pour réagir aux changements
@@ -54,19 +55,6 @@ export default {
         setTimeout(() => {
           this.isButtonDisabled = false; // Réactive le bouton après 3 secondes
         }, 3000);
-      }
-    },
-    async fetchPointsDeVie() {
-      try {
-        // Utilisation d'Axios pour effectuer une requête GET à l'API
-        const response = await axios.get('http://localhost:3000/api/pointsDeVie');
-        // Accès aux données de la réponse et mise à jour des points de vie du composant
-        const data = response.data;
-        this.pointsDeVie = data[this.localType.toLowerCase()];
-        this.pointsDeVieBase = data[this.localType.toLowerCase()];
-      } catch (error) {
-        // Gestion des erreurs lors de la récupération des points de vie
-        console.error('Erreur lors de la récupération des points de vie', error);
       }
     },
     handleDegatChange(newValue) {
