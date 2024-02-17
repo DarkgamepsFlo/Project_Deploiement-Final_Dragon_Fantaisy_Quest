@@ -1,6 +1,6 @@
 <template>
   <div class="points-section">
-
+    
     <img :src="require('@/assets/' + img)" alt="Description de l'image">
 
     <!-- Affichage des points de vie actuels -->

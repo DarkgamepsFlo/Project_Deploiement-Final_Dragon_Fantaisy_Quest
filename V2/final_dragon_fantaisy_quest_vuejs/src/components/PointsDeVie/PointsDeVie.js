@@ -49,7 +49,7 @@ export default {
       if (second_result > 0){
         setTimeout(() => {
           this.decrementerPointsDeVie('Attack');
-        }, 5000);
+        }, second_result);
       }
     },
   },

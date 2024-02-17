@@ -7,9 +7,9 @@ class getPointsDeVieService{
   async getPointsDeVieAPI(perso) {
     var response = "";
     if (perso === "Joueur"){
-      response = await axios.get('http://localhost:3000/api/pointsDeVieJoueur');
+      response = await axios.get('http://localhost:3000/characters/getPVJoueur');
     } else if (perso === "Ennemi") {
-      response = await axios.get('http://localhost:3000/api/pointsDeVieEnnemi');
+      response = await axios.get('http://localhost:3000/characters/getPVEnnemi');
     }
     return response.data;
   }

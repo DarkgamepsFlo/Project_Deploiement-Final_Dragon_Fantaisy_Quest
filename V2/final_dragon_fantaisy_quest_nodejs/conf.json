@@ -1,9 +1,0 @@
-{
-    "joueur": {
-      "pointsDeVie": 100
-    },
-    "ennemi": {
-      "pointsDeVie": 50
-    }
-  }
-  
