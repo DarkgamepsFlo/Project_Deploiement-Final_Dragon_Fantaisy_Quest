@@ -1,3 +1,9 @@
 {
-    "pointsDeVie": 50
+    "Sephiroth" : {
+        "pointsDeVie": 50,
+        "img": {
+            "img1": "Sephiroth",
+            "img2": "Sephiroth_attack"
+        }
+    }
 }
