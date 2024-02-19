@@ -28,7 +28,8 @@ export default {
   async mounted() {
     // Méthode appelée automatiquement après que le composant est monté dans le DOM
     // Elle effectue une requête à l'API pour récupérer les points de vie initiaux
-    this.pointsDeVie = await fetchPointsDeVieService.fetchPointsDeVieAPI(this.localType);
+    if(this.localType === "Ennemi")
+      this.pointsDeVie = await fetchPointsDeVieService.fetchPointsDeVieAPI(this.localType, "Sephiroth");
   },
   watch: {
     degat: 'handleDegatChange', // Utilise la méthode handleDegatChange pour réagir aux changements

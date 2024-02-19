@@ -1,16 +1,34 @@
+// import Component
 import PointDeVie from '../../components/PointsDeVie/PointsDeVie.vue';
-import BarreAction from '../../components/BarreAction/BarreAction.vue'
+import BarreAction from '../../components/BarreAction/BarreAction.vue';
+
+// import functions
+import getImgService from '@/services/api/getImgService';
 
 export default {
   data() {
     return {
       DegatEnnemi: 0,
-      DegatJoueur: 0
+      DegatJoueur: 0,
+      ImgEnnemi: "",
+      ImgJoueur: "",
+      ImgBaseEnnemi: "",
+      ImgBaseJoueur: ""
     }
   },
   components: {
     PointDeVie,
     BarreAction,
+  },
+  async mounted() {
+    this.ImgEnnemi = await getImgService.getImgAPI("Ennemi", "Sephiroth");
+    this.ImgJoueur = await getImgService.getImgAPI("Joueur", "Cloud");
+
+    this.ImgBaseEnnemi = this.ImgEnnemi.img_ennemi.img1 + ".gif";
+    this.ImgBaseJoueur = this.ImgJoueur.img_joueur.img1 + ".gif";
+
+    console.log(this.ImgBaseEnnemi);
+    console.log(this.ImgBaseJoueur);
   },
   methods: {
     handleDecrement(type, power) {
