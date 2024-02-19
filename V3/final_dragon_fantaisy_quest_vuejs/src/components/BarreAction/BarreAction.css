@@ -1,0 +1,98 @@
+.barre-action {
+    height: 120px; /* Ajoutez la hauteur souhaitée de votre div */
+    background: linear-gradient(to bottom right, #0100AB, #040127);
+    border: #dbdbdb 5px solid;
+    border-radius: 20px;
+}
+
+.barre-life {
+    width: 600px;
+}
+
+.barre-attack {
+    width: 1500px;
+}
+
+.h1-barre-action {
+    margin: 0%;
+}
+
+.back-barre-action {
+    position: fixed;
+    bottom: 0;
+    width: 100%; /* Assure que la barre prend toute la largeur de l'écran */
+    z-index: 1; /* Assure que la barre est au-dessus du reste du contenu */
+    background-color: black;
+
+    display: flex;
+}
+
+.button{
+    margin-top: 33px;
+    margin-bottom: 33px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 250px;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    font-family: 'Skranji', cursive;
+    color: #dbdbdb;
+    font-size: 18px;
+    font-weight: 400;
+    text-shadow: 0 1px 3px #000;
+    text-align: center;
+    padding: 10px 0;
+    background: linear-gradient(to bottom right, #0100AB, #040127);
+    border-top: 4px ridge #dbdbdb;
+    border-left: 4px groove #dbdbdb;
+    border-right: 4px ridge #dbdbdb;
+    border-bottom: 4px groove #dbdbdb;
+    box-shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
+}
+
+.button-disabled{
+    margin-top: 33px;
+    margin-bottom: 33px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 250px;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    font-family: 'Skranji', cursive;
+    color: #848484;
+    font-size: 18px;
+    font-weight: 400;
+    text-shadow: 0 1px 3px #000;
+    text-align: center;
+    padding: 10px 0;
+    background: linear-gradient(to bottom right, #585858, #000000);
+    border-top: 4px ridge #dbdbdb;
+    border-left: 4px groove #dbdbdb;
+    border-right: 4px ridge #dbdbdb;
+    border-bottom: 4px groove #dbdbdb;
+    box-shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
+}
+  
+.button:hover{
+    background: linear-gradient(to bottom right, #0100AB, #040127);
+    box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
+}
+  
+.button:active{
+    background: linear-gradient(to bottom right, #0100AB, #040127);
+    box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
+}
+
+canvas {
+    background: #eeeeee00;
+    display: block;
+    margin: 0 auto;
+    height: 15px;
+    width: 300px;
+    border: solid 3px #dbdbdb;
+}
+
+.pv-class {
+    font-family: 'Skranji', cursive;
+    letter-spacing: 2px;
+}
