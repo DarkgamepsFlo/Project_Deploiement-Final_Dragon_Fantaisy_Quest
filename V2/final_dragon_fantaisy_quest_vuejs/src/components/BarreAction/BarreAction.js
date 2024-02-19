@@ -29,7 +29,7 @@ export default {
   async mounted() {
     // Méthode appelée automatiquement après que le composant est monté dans le DOM
     // Elle effectue une requête à l'API pour récupérer les points de vie initiaux
-    this.pointsDeVie = await fetchPointsDeVieService.fetchPointsDeVieAPI(this.localType);
+    this.pointsDeVie = await fetchPointsDeVieService.fetchPointsDeVieAPI(this.localType, "Cloud");
     this.pointsDeVieBase = this.pointsDeVie;
 
     // Récupérer le canvas et le contexte

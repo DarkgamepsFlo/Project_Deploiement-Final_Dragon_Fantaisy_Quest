@@ -1,4 +1,17 @@
 {
-  "pointsDeVie": 100
+  "Cloud": {
+    "pointsDeVie": 100,
+    "img": {
+      "img1": "Cloud_1",
+      "img2": "Cloud",
+      "img3": "Cloud_fin"
+    }
+  },
+  "Tifa": {
+    "pointsDeVie": 80,
+    "img": {
+      "img1": "Tifa"
+    }
+  }
 }
   
