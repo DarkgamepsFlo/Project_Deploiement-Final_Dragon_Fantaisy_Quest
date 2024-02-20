@@ -6,7 +6,6 @@ async function getPVJoueurs(req, res, next) {
     try {
         // Récupérer le paramètre de requête 'name' de la requête HTTP
         const name = req.query.name;
-        console.log(name);
         // Utiliser 'name' comme nécessaire dans votre logique de service
         const result = await getPVJoueur(name);
         return res.send(result);
@@ -21,7 +20,6 @@ async function getPVEnnemis(req, res, next) {
     try {
         // Récupérer le paramètre de requête 'name' de la requête HTTP
         const name = req.query.name;
-        console.log(name);
         // Utiliser 'name' comme nécessaire dans votre logique de service
         const result = await getPVEnnemi(name);
         return res.send(result);
@@ -36,7 +34,6 @@ async function getImgJoueurs(req, res, next) {
     try {
         // Récupérer le paramètre de requête 'name' de la requête HTTP
         const name = req.query.name;
-        console.log(name);
         // Utiliser 'name' comme nécessaire dans votre logique de service
         const result = await getImgJoueur(name);
         return res.send(result);
@@ -51,7 +48,6 @@ async function getImgEnnemis(req, res, next) {
     try {
         // Récupérer le paramètre de requête 'name' de la requête HTTP
         const name = req.query.name;
-        console.log(name);
         // Utiliser 'name' comme nécessaire dans votre logique de service
         const result = await getImgEnnemi(name);
         return res.send(result);

@@ -4,14 +4,12 @@ import handleDegatChangeService from "@/services/handleDegatChangeService";
 
 export default {
   data() {
-    // Données locales du composant, contenant les points de vie actuels
     return {
       pointsDeVie: null,
       localType: this.type,
     };
   },
   props: {
-    // Propriété reçue du composant parent, indiquant le type (Joueur ou Ennemi)
     type: {
       type: String,
       required: true,
@@ -24,25 +22,31 @@ export default {
       type: String,
       default: null,
     },
+    isAttack: {
+      type: Boolean,
+      default: false,
+    },
   },
   async mounted() {
-    // Méthode appelée automatiquement après que le composant est monté dans le DOM
-    // Elle effectue une requête à l'API pour récupérer les points de vie initiaux
-    if(this.localType === "Ennemi")
+    console.log("Je suis le mounted PointsDeVie")
+    if (this.localType === "Ennemi")
       this.pointsDeVie = await fetchPointsDeVieService.fetchPointsDeVieAPI(this.localType, "Sephiroth");
   },
   watch: {
-    degat: 'handleDegatChange', // Utilise la méthode handleDegatChange pour réagir aux changements
+    degat: 'handleDegatChange',
+    isAttack: function(newVal) {
+      if (newVal) {
+        this.letsAnimationAttack();
+      }
+    }
   },
   methods: {
-    // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie
     async decrementerPointsDeVie() {
       const int_result = await decrementerPointsDeVieService.decrementerPointsDeVie(this.localType, null);
       this.$emit('decrement', this.localType, int_result);
     },
 
     async handleDegatChange(newValue) {
-      // Réagit lorsque la propriété degat est modifiée
       var [pv_result, second_result] = await handleDegatChangeService.handleDegatChange(this.localType, this.pointsDeVie, newValue);
 
       this.pointsDeVie = pv_result;
@@ -51,6 +55,38 @@ export default {
         setTimeout(() => {
           this.decrementerPointsDeVie('Attack');
         }, second_result);
+      }
+    },
+
+    letsAnimationAttack() {
+      if (this.isAttack && this.localType === "Joueur") {
+        const image = document.getElementById('imageJoueur');
+        image.style.setProperty('transform', 'translateX(400px) scaleX(-1)');
+        image.style.setProperty('transition', 'transform 1s ease');
+        image.style.setProperty('flex', '1');
+
+        this.$emit('change-img', '2', "Joueur");
+        
+        setTimeout(() => {
+          image.style.removeProperty('transform');
+          image.style.setProperty('transition', 'transform 1s ease');
+          image.style.removeProperty('flex');
+          this.$emit('change-img', '1', "Joueur");
+        }, 3000);
+      } else if (this.isAttack && this.localType === "Ennemi") {
+        const image = document.getElementById('imageEnnemi');
+        image.style.setProperty('transform', 'translateX(-400px) scaleX(-1)');
+        image.style.setProperty('transition', 'transform 1s ease');
+        image.style.setProperty('flex', '1');
+
+        this.$emit('change-img', '2', "Ennemi");
+        
+        setTimeout(() => {
+          image.style.removeProperty('transform');
+          image.style.setProperty('transition', 'transform 1s ease');
+          image.style.removeProperty('flex');
+          this.$emit('change-img', '1', "Ennemi");
+        }, 3000);
       }
     },
   },

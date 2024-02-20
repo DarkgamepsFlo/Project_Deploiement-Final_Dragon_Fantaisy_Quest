@@ -8,7 +8,7 @@ class handleDegatChangeService{
     } else if (perso === 'Ennemi'){
         if(degat > 0)
             pv -= degat
-        return [pv, 3000]
+        return [pv, 5000]
     }
   }
 }

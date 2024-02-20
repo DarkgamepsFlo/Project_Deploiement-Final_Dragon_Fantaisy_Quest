@@ -27,6 +27,8 @@ export default {
     },
   },
   async mounted() {
+
+    console.log("Je suis le mounted deuxième BarreAction");
     // Méthode appelée automatiquement après que le composant est monté dans le DOM
     // Elle effectue une requête à l'API pour récupérer les points de vie initiaux
     this.pointsDeVie = await fetchPointsDeVieService.fetchPointsDeVieAPI(this.localType, "Cloud");
@@ -86,10 +88,13 @@ export default {
     // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie
     async decrementerPointsDeVie(name) {
       if (!this.isButtonDisabled) {
+
+        console.log("Le bouton est activé, le Joueur attaque l'ennemi")
         this.isButtonDisabled = true; // Désactive le bouton
 
         const int_result = await decrementerPointsDeVieService.decrementerPointsDeVie(this.localType, name);
-        
+        console.log(int_result);
+
         if (int_result === -1){
           if (this.pointsDeVie > this.pointsDeVieBase - 5)
             this.pointsDeVie = this.pointsDeVieBase;
@@ -102,7 +107,7 @@ export default {
         // Cette méthode permet de faire en sorte que le bouton ne soit pas cliquable par le joueur pendant 5 secondes
         setTimeout(() => {
           this.isButtonDisabled = false;
-        }, 5000);
+        }, 10000);
       }
     },
 

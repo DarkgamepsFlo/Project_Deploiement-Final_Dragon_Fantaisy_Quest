@@ -1,8 +1,5 @@
-// import Component
 import PointDeVie from '../../components/PointsDeVie/PointsDeVie.vue';
 import BarreAction from '../../components/BarreAction/BarreAction.vue';
-
-// import functions
 import getImgService from '@/services/api/getImgService';
 
 export default {
@@ -13,7 +10,9 @@ export default {
       ImgEnnemi: "",
       ImgJoueur: "",
       ImgBaseEnnemi: "",
-      ImgBaseJoueur: ""
+      ImgBaseJoueur: "",
+      isAttackJoueur: null,
+      isAttackEnnemi: null,
     }
   },
   components: {
@@ -26,19 +25,36 @@ export default {
 
     this.ImgBaseEnnemi = this.ImgEnnemi.img_ennemi.img1 + ".gif";
     this.ImgBaseJoueur = this.ImgJoueur.img_joueur.img1 + ".gif";
-
-    console.log(this.ImgBaseEnnemi);
-    console.log(this.ImgBaseJoueur);
   },
   methods: {
     handleDecrement(type, power) {
-      // Logique pour décrémenter les points de vie de l'autre composant
       if (type === 'Joueur') {
         this.DegatEnnemi = power;
         this.DegatJoueur = 0;
+        this.isAttackJoueur = true;
+        this.isAttackEnnemi = false;
       } else if (type === 'Ennemi') {
         this.DegatEnnemi = 0;
         this.DegatJoueur = power;
+        this.isAttackEnnemi = true;
+        this.isAttackJoueur = false;
+      }
+    },
+    updateImg(newImg, player) {
+      if(player == "Joueur"){
+        if (newImg == 1){
+          this.ImgBaseJoueur = this.ImgJoueur.img_joueur.img1 + ".gif";
+        }
+        if (newImg == 2){
+          this.ImgBaseJoueur = this.ImgJoueur.img_joueur.img2 + ".gif";
+        }
+      } else if(player == "Ennemi"){
+        if (newImg == 1){
+          this.ImgBaseEnnemi = this.ImgEnnemi.img_ennemi.img1 + ".gif";
+        }
+        if (newImg == 2){
+          this.ImgBaseEnnemi = this.ImgEnnemi.img_ennemi.img2 + ".gif";
+        }
       }
     },
   },

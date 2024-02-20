@@ -8,7 +8,22 @@
   height: 100vh; /* 100% de la hauteur de la fenêtre */
   margin: 0;
 }
+
+.transition-class {
+  transition: opacity 0.5s ease; /* Ajoutez d'autres propriétés pour l'effet souhaité */
+  opacity: 1; /* Assurez-vous que l'élément est visible */
+}
   
 .points-de-vie-container {
   display: flex;
+}
+
+.pointDeVieCompJoueur {
+  margin-left: 25%;
+  margin-bottom: 250px;
+}
+
+.pointDeVieCompEnnemi {
+  margin-left: 65%;
+  margin-bottom: 250px;
 }
