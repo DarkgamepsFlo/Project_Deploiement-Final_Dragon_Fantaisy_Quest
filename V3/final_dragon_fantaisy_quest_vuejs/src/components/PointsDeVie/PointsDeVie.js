@@ -75,7 +75,7 @@ export default {
         }, 3000);
       } else if (this.isAttack && this.localType === "Ennemi") {
         const image = document.getElementById('imageEnnemi');
-        image.style.setProperty('transform', 'translateX(-400px) scaleX(-1)');
+        image.style.setProperty('transform', 'translateX(-500px) scaleX(-1)');
         image.style.setProperty('transition', 'transform 1s ease');
         image.style.setProperty('flex', '1');
 
