@@ -1,9 +1,4 @@
 export default {
-  data() {
-    return {
-      pointsDeVie: null,
-    };
-  },
   props: {
     type: {
       type: String,

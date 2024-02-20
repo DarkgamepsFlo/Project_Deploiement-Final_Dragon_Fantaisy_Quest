@@ -42,12 +42,18 @@ export default {
   },
   methods: {
     async decrementerPointsDeVie() {
-      const int_result = await decrementerPointsDeVieService.decrementerPointsDeVie(this.localType, null);
-      this.$emit('decrement', this.localType, int_result);
+      if (this.localType === "Ennemi"){
+        console.log("Le bouton est activé, l'Ennemi' attaque le joueur")
+
+        const int_result = await decrementerPointsDeVieService.decrementerPointsDeVie(this.localType, null);
+        this.$emit('decrement', this.localType, int_result);
+      }
+      
     },
 
     async handleDegatChange(newValue) {
-      var [pv_result, second_result] = await handleDegatChangeService.handleDegatChange(this.localType, this.pointsDeVie, newValue);
+      if (this.localType === "Ennemi"){
+        var [pv_result, second_result] = await handleDegatChangeService.handleDegatChange(this.localType, this.pointsDeVie, newValue);
 
       this.pointsDeVie = pv_result;
 
@@ -56,12 +62,13 @@ export default {
           this.decrementerPointsDeVie('Attack');
         }, second_result);
       }
+      }
     },
 
     letsAnimationAttack() {
       if (this.isAttack && this.localType === "Joueur") {
         const image = document.getElementById('imageJoueur');
-        image.style.setProperty('transform', 'translateX(400px) scaleX(-1)');
+        image.style.setProperty('transform', 'translateX(350px) scaleX(-1)');
         image.style.setProperty('transition', 'transform 1s ease');
         image.style.setProperty('flex', '1');
 
@@ -73,9 +80,9 @@ export default {
           image.style.removeProperty('flex');
           this.$emit('change-img', '1', "Joueur");
         }, 3000);
-      } else if (this.isAttack && this.localType === "Ennemi") {
+      } if (this.isAttack && this.localType === "Ennemi") {
         const image = document.getElementById('imageEnnemi');
-        image.style.setProperty('transform', 'translateX(-500px) scaleX(-1)');
+        image.style.setProperty('transform', 'translateX(-450px) scaleX(-1)');
         image.style.setProperty('transition', 'transform 1s ease');
         image.style.setProperty('flex', '1');
 

@@ -47,12 +47,10 @@ export default {
         this.DegatJoueur = power;
         this.isAttackEnnemi = true;
         this.isAttackJoueur = false;
-        if (!this.isDamageEnnemi) {
-          this.isDamageEnnemi = true;
-          setTimeout(() => {
-            this.isDamageEnnemi = false; // Réinitialiser après 2 secondes
-          }, 2000);
-        }
+        this.isDamageEnnemi = true;
+        setTimeout(() => {
+          this.isDamageEnnemi = false; // Réinitialiser après 2 secondes
+        }, 2000);
       }
     },
     updateImg(newImg, player) {
