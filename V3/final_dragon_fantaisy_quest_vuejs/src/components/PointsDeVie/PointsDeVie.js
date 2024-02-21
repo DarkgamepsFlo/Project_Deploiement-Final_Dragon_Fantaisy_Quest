@@ -55,20 +55,26 @@ export default {
       if (this.localType === "Ennemi"){
         var [pv_result, second_result] = await handleDegatChangeService.handleDegatChange(this.localType, this.pointsDeVie, newValue);
 
-      this.pointsDeVie = pv_result;
+        this.pointsDeVie = pv_result;
 
-      if (second_result > 0){
-        setTimeout(() => {
-          this.decrementerPointsDeVie('Attack');
-        }, second_result);
-      }
+        console.log("PV restant de l'ennemi : " + this.pointsDeVie);
+
+        if(this.pointsDeVie > 0){
+          if (second_result > 0){
+            setTimeout(() => {
+              this.decrementerPointsDeVie('Attack');
+            }, second_result);
+          }
+        } else {
+          console.log("Ennemi KO par le joueur");
+        }
       }
     },
 
     letsAnimationAttack() {
       if (this.isAttack && this.localType === "Joueur") {
         const image = document.getElementById('imageJoueur');
-        image.style.setProperty('transform', 'translateX(350px) scaleX(-1)');
+        image.style.setProperty('transform', 'translateX(500px) scaleX(-1)');
         image.style.setProperty('transition', 'transform 1s ease');
         image.style.setProperty('flex', '1');
 
@@ -82,7 +88,7 @@ export default {
         }, 3000);
       } if (this.isAttack && this.localType === "Ennemi") {
         const image = document.getElementById('imageEnnemi');
-        image.style.setProperty('transform', 'translateX(-450px) scaleX(-1)');
+        image.style.setProperty('transform', 'translateX(-650px) scaleX(-1)');
         image.style.setProperty('transition', 'transform 1s ease');
         image.style.setProperty('flex', '1');
 

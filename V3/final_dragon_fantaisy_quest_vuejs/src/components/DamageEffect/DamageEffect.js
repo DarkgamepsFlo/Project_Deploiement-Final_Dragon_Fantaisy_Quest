@@ -3,7 +3,7 @@ export default {
     type: {
       type: String,
       required: true,
-    }
+    },
   },
   async mounted() {
     console.log("Je suis le mounted DamageEffect")

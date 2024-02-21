@@ -3,12 +3,12 @@ class decrementerPointsDeVieService{
   // Cette méthode permet d'ajouter une boite dans la liste de suggestion
   async decrementerPointsDeVie(perso, name) {
     if (perso === "Ennemi" ){
-        return 10
+        return Math.floor(Math.random() * 12) + 5;
     } else if (perso === "Joueur"){
         if (name === 'Punch')
-            return 8
+            return Math.floor(Math.random() * 10) + 5;
         if (name === 'Magic_Attack')
-            return 12
+            return Math.floor(Math.random() * 18) + 6;
         if (name === 'Heal')
             return -1
         else 
