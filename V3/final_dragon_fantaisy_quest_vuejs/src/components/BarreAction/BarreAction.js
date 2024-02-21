@@ -96,10 +96,11 @@ export default {
         console.log(int_result);
 
         if (int_result === -1){
-          if (this.pointsDeVie > this.pointsDeVieBase - 5)
+          var result = Math.floor(Math.random() * 18) + 9;
+          if (this.pointsDeVie > this.pointsDeVieBase - result)
             this.pointsDeVie = this.pointsDeVieBase;
           else
-            this.pointsDeVie += 5
+            this.pointsDeVie += result
         }
 
         this.$emit('decrement', this.localType, int_result);
@@ -107,7 +108,7 @@ export default {
         // Cette méthode permet de faire en sorte que le bouton ne soit pas cliquable par le joueur pendant 5 secondes
         setTimeout(() => {
           this.isButtonDisabled = false;
-        }, 10000);
+        }, 12000);
       }
     },
 
@@ -119,10 +120,16 @@ export default {
       
       this.pointsDeVie = pv_result;
 
-      if (second_result > 0){
-        setTimeout(() => {
-          this.decrementerPointsDeVie(this.localType, 'Attack');
-        }, second_result);
+      console.log("PV restant du joueur : " + this.pointsDeVie);
+
+      if(this.pointsDeVie > 0){
+        if (second_result > 0){
+          setTimeout(() => {
+            this.decrementerPointsDeVie(this.localType, 'Attack');
+          }, second_result);
+        }
+      } else {
+        console.log("Joueur KO par l'ennemi");
       }
     },
   },

@@ -1,6 +1,7 @@
 import PointDeVie from '../../components/PointsDeVie/PointsDeVie.vue';
 import BarreAction from '../../components/BarreAction/BarreAction.vue';
-import getImgService from '@/services/api/getImgService';
+import getImgService from '../../services/api/getImgService';
+import DamageEffect from '../../components/DamageEffect/DamageEffect.vue';
 
 export default {
   data() {
@@ -13,11 +14,14 @@ export default {
       ImgBaseJoueur: "",
       isAttackJoueur: null,
       isAttackEnnemi: null,
+      isDamageJoueur: null,
+      isDamageEnnemi: null
     }
   },
   components: {
     PointDeVie,
     BarreAction,
+    DamageEffect
   },
   async mounted() {
     this.ImgEnnemi = await getImgService.getImgAPI("Ennemi", "Sephiroth");
@@ -33,11 +37,20 @@ export default {
         this.DegatJoueur = 0;
         this.isAttackJoueur = true;
         this.isAttackEnnemi = false;
+        this.isDamageJoueur = true;
+        this.isDamageEnnemi = false;
+        setTimeout(() => {
+          this.isDamageJoueur = false; // Réinitialiser après 2 secondes
+        }, 2000);
       } else if (type === 'Ennemi') {
         this.DegatEnnemi = 0;
         this.DegatJoueur = power;
         this.isAttackEnnemi = true;
         this.isAttackJoueur = false;
+        this.isDamageEnnemi = true;
+        setTimeout(() => {
+          this.isDamageEnnemi = false; // Réinitialiser après 2 secondes
+        }, 2000);
       }
     },
     updateImg(newImg, player) {
