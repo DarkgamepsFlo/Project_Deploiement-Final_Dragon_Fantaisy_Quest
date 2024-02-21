@@ -67,6 +67,7 @@ export default {
           }
         } else {
           console.log("Ennemi KO par le joueur");
+          this.$emit('endGame', this.localType, true);
         }
       }
     },

@@ -2,6 +2,8 @@ import PointDeVie from '../../components/PointsDeVie/PointsDeVie.vue';
 import BarreAction from '../../components/BarreAction/BarreAction.vue';
 import getImgService from '../../services/api/getImgService';
 import DamageEffect from '../../components/DamageEffect/DamageEffect.vue';
+import VictoryPage from '../VictoryPage/VictoryPage.vue';
+import GameOver from '../GameOver/GameOver.vue';
 
 export default {
   data() {
@@ -15,13 +17,19 @@ export default {
       isAttackJoueur: null,
       isAttackEnnemi: null,
       isDamageJoueur: null,
-      isDamageEnnemi: null
+      isDamageEnnemi: null,
+      isGameOver: null,
+      isVictory: null,
+      isGameOverBase: null,
+      isVictoryBase: null
     }
   },
   components: {
     PointDeVie,
     BarreAction,
-    DamageEffect
+    DamageEffect,
+    VictoryPage,
+    GameOver
   },
   async mounted() {
     this.ImgEnnemi = await getImgService.getImgAPI("Ennemi", "Sephiroth");
@@ -70,5 +78,26 @@ export default {
         }
       }
     },
+    endGamePage(type, victory = false){
+      console.log(type);
+      console.log(victory);
+      if(type === "Joueur"){
+        console.log("Le joueur a perdu la Game");
+        setTimeout(() => {
+          this.isGameOver = true;
+        }, 3000);
+        setTimeout(() => {
+          this.isGameOverBase = true;
+        }, 5000);
+      } else if (type === "Ennemi"){
+        console.log("Le joueur a gagné la game");
+        setTimeout(() => {
+          this.isVictory = true;
+        }, 4000);
+        setTimeout(() => {
+          this.isVictoryBase = true;
+        }, 7000);
+      }
+    }
   },
 };

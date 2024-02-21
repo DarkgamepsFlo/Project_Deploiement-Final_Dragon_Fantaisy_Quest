@@ -7,7 +7,10 @@
   background-position: bottom; /* Ajout de la propriété background-position */
   height: 100vh; /* 100% de la hauteur de la fenêtre */
   margin: 0;
+  position: relative;
 }
+
+
 
 .transition-class {
   transition: opacity 0.5s ease; /* Ajoutez d'autres propriétés pour l'effet souhaité */
@@ -26,4 +29,57 @@
 .pointDeVieCompEnnemi {
   margin-left: 65%;
   margin-bottom: 250px;
+}
+
+
+
+
+
+
+
+
+/* Animation pour faire apparaitre la div .victory */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animation pour faire apparaitre la div .gameover */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Appliquer les animations aux divs */
+.victory {
+  animation: slideInRight 3s ease-in-out;
+  background-color: aqua;
+  background-image: url('@/assets/Background_victory.jpg');
+  background-size: cover;
+  background-position: bottom; /* Ajout de la propriété background-position */
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.gameover {
+  animation: fadeIn 2s ease-in-out;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  z-index: 2;
 }

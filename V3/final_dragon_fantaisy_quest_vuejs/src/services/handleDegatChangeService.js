@@ -3,8 +3,12 @@ class handleDegatChangeService{
   // Cette méthode permet d'ajouter une boite dans la liste de suggestion
   async handleDegatChange(perso, pv, degat) {
     if (perso === 'Joueur'){
+      if (pv - degat <= 0)
+        return [0, 0]
+      else {
         pv -= degat
         return [pv, 0]
+      }
     } else if (perso === 'Ennemi'){
         if(degat > 0)
             pv -= degat

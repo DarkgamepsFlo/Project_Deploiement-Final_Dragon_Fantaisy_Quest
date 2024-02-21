@@ -128,8 +128,9 @@ export default {
             this.decrementerPointsDeVie(this.localType, 'Attack');
           }, second_result);
         }
-      } else {
+      } else { 
         console.log("Joueur KO par l'ennemi");
+        this.$emit('endGame', this.localType, true);
       }
     },
   },

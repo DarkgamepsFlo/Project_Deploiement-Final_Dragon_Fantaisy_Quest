@@ -1,6 +1,7 @@
 {
   "Cloud": {
-    "pointsDeVie": 100,
+    "pointsDeVieBase": 100,
+    "pointsDeVie": 1,
     "img": {
       "img1": "Cloud_1",
       "img2": "Cloud",
