@@ -1,3 +1,4 @@
+// import
 import fetchPointsDeVieService from "@/services/fetchPointsDeVieService";
 import decrementerPointsDeVieService from "@/services/decrementerPointsDeVieService";
 import handleDegatChangeService from "@/services/handleDegatChangeService";
@@ -11,16 +12,17 @@ export default {
       localType: this.type,
       isButtonDisabled: false,
 
-      canvas: null,
-      ctx: null,
+      canvas: null, // Permet de gérer la barre de pv
+      ctx: null, // Permet de gérer la barre de pv
     };
   },
   props: {
-    // Propriété reçue du composant parent, indiquant le type (Joueur ou Ennemi)
+    // Propriété reçue du composant parent qui indique le type du personnage
     type: {
       type: String,
       required: true,
     },
+    // Propriété reçue du composant parent qui indique les dégâts
     degat: {
       type: Number,
       default: 0,
@@ -28,13 +30,11 @@ export default {
   },
   async mounted() {
 
-    console.log("Je suis le mounted deuxième BarreAction");
-    // Méthode appelée automatiquement après que le composant est monté dans le DOM
-    // Elle effectue une requête à l'API pour récupérer les points de vie initiaux
+    // Requête API pour récupérer les PV du joueur dans la base de données
     this.pointsDeVie = await fetchPointsDeVieService.fetchPointsDeVieAPI(this.localType, "Cloud");
     this.pointsDeVieBase = this.pointsDeVie;
 
-    // Récupérer le canvas et le contexte
+    // Récupérer le canvas et le contexte, permet de gérer la barre de pv
     this.canvas = document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
 
@@ -42,7 +42,7 @@ export default {
     this.drawLifeBar();
   },
   watch: {
-    degat: 'handleDegatChange', // Utilise la méthode handleDegatChange pour réagir aux changements
+    degat: 'handleDegatChange', // Exécutrer handleDegatChange lorsqu'on reçoit des dégâts
   },
   methods: {
     // Dessiner la barre de vie dans le canvas
@@ -85,17 +85,14 @@ export default {
       animate();
     },    
 
-    // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie
+    // Méthode appelée lorsqu'on clique sur le bouton de décrémentation des points de vie de l'adversaire
     async decrementerPointsDeVie(name) {
       if (!this.isButtonDisabled) {
-
-        console.log("Le bouton est activé, le Joueur attaque l'ennemi")
         this.isButtonDisabled = true; // Désactive le bouton
 
-        const int_result = await decrementerPointsDeVieService.decrementerPointsDeVie(this.localType, name);
-        console.log(int_result);
+        const int_result = await decrementerPointsDeVieService.decrementerPointsDeVie(this.localType, name); // Méthode permettant de décrémenter les pv
 
-        if (int_result === -1){
+        if (int_result === -1){ // Si le résultat vaut -1, le joueur peut se soigner
           var result = Math.floor(Math.random() * 18) + 9;
           if (this.pointsDeVie > this.pointsDeVieBase - result)
             this.pointsDeVie = this.pointsDeVieBase;
@@ -105,13 +102,14 @@ export default {
 
         this.$emit('decrement', this.localType, int_result);
 
-        // Cette méthode permet de faire en sorte que le bouton ne soit pas cliquable par le joueur pendant 5 secondes
+        // Cette méthode permet de faire en sorte que le bouton ne soit pas cliquable par le joueur pendant 12 secondes
         setTimeout(() => {
           this.isButtonDisabled = false;
         }, 12000);
       }
     },
 
+    // Cette méthode permet de décrémenter les points de vie du joueur
     async handleDegatChange(newValue) {
 
       this.drawLifeBar();
@@ -119,17 +117,15 @@ export default {
       var [pv_result, second_result] = await handleDegatChangeService.handleDegatChange(this.localType, this.pointsDeVie, newValue)
       
       this.pointsDeVie = pv_result;
-
-      console.log("PV restant du joueur : " + this.pointsDeVie);
-
+      
+      // Si le joueur possède encore des points de vie, il va décrémenter les pv de l'adversaire
       if(this.pointsDeVie > 0){
         if (second_result > 0){
           setTimeout(() => {
             this.decrementerPointsDeVie(this.localType, 'Attack');
           }, second_result);
         }
-      } else { 
-        console.log("Joueur KO par l'ennemi");
+      } else { // Sinon on affiche la fenêtre de game over
         this.$emit('endGame', this.localType, true);
       }
     },

@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
   res.send('Bienvenue sur le serveur de gestion de RPG !');
 });
 
-// Route principale
+// Route characters
 app.get('/characters', (req, res) => {
   res.send('Bienvenue sur le serveur de gestion des personnages !');
 });

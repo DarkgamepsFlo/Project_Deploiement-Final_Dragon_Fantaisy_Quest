@@ -1,8 +1,8 @@
-// Cette classe permet de s'occuper de l'ensemble des services lorsqu'on ajoute une boite
+// Cette classe permet de s'occuper de l'ensemble des fonctionnalités permettant de décrémenter les pv d'un personnage
 class handleDegatChangeService{
-  // Cette méthode permet d'ajouter une boite dans la liste de suggestion
+  // Cette méthode permet de décrémenter les pv en renvoyer la nouvelle valeur et d'envoyer le nombre de seconde à attendre
   async handleDegatChange(perso, pv, degat) {
-    if (perso === 'Joueur'){
+    if (perso === 'Joueur'){ // Si le joueur arrive à zéro, on force la valeur à être 0
       if (pv - degat <= 0)
         return [0, 0]
       else {
