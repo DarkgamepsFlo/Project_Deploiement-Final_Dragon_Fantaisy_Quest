@@ -2,6 +2,7 @@
 const joueur = require('./db/database_joueur.json');
 const ennemi = require('./db/database_ennemi.json');
 
+// Cette méthode permet de récupérer les points de vie par rapport au nom du personnage du joueur
 async function getPVJoueur(name) {
   try {
     if(name === "Cloud"){
@@ -23,6 +24,7 @@ async function getPVJoueur(name) {
   }
 }
 
+// Cette méthode permet de récupérer les points de vie par rapport au nom du personnage ennemi
 async function getPVEnnemi(name) {
   try {
     if(name === "Sephiroth"){
@@ -40,6 +42,7 @@ async function getPVEnnemi(name) {
   }
 }
 
+// Cette méthode permet de récupérer les images par rapport au nom du personnage du joueur
 async function getImgJoueur(name) {
   try {
     if(name === "Cloud"){
@@ -61,6 +64,7 @@ async function getImgJoueur(name) {
   }
 }
 
+// Cette méthode permet de récupérer les images par rapport au nom du personnage ennemi
 async function getImgEnnemi(name) {
   try {
     if(name === "Sephiroth"){

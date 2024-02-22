@@ -29,7 +29,7 @@ async function getPVEnnemis(req, res, next) {
     }
 }
 
-// Cette fonction va permettre de récupérer les points de vie des joueurs
+// Cette fonction va permettre de récupérer les images des joueurs
 async function getImgJoueurs(req, res, next) {
     try {
         // Récupérer le paramètre de requête 'name' de la requête HTTP
@@ -43,7 +43,7 @@ async function getImgJoueurs(req, res, next) {
     }
 }
 
-// Cette fonction va permettre de récupérer les points de vie des ennemis
+// Cette fonction va permettre de récupérer les images des ennemis
 async function getImgEnnemis(req, res, next) {
     try {
         // Récupérer le paramètre de requête 'name' de la requête HTTP
