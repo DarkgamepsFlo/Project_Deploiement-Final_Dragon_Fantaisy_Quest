@@ -1,0 +1,9 @@
+#DamageJoueur {
+    margin-top: 380px;
+    margin-left: 1170px; /* Adapté pour un seul type de PC */
+}
+
+#DamageEnnemi {
+    margin-top: 300px;
+    margin-left: 420px; /* Adapté pour un seul type de PC */
+}

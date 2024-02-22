@@ -1,0 +1,39 @@
+.you-win-img {
+    position: absolute; /* Position absolue pour pouvoir contrôler facilement la position */
+    left: 38%; /* Déplacez l'image de 50% de la largeur de son conteneur */
+    top: 32%;
+    width: 400px;
+}
+
+.victory-img {
+    position: absolute; /* Position absolue pour pouvoir contrôler facilement la position */
+    left: 35%; /* Déplacez l'image de 50% de la largeur de son conteneur */
+    top: -10%;
+    width: 600px;
+}
+
+.retryButton{
+    margin-top: 40%;
+    margin-left: 42%;
+    width: 350px;
+    position: absolute;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    font-family: 'Skranji', cursive;
+    color: #2f2f2f;
+    font-size: 26px;
+    font-weight: 400;
+    text-shadow: 0 1px 3px #ff0000;
+    text-align: center;
+    padding: 10px 0;
+    background: linear-gradient(to bottom right, #ff9500, #ffc800);
+    border-top: 4px ridge #2f2f2f;
+    border-left: 4px groove #2f2f2f;
+    border-right: 4px ridge #2f2f2f;
+    border-bottom: 4px groove #2f2f2f;
+}
+
+.retryButton:hover{
+    background: linear-gradient(to bottom right, #ffc800, #ff9500);
+    box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
+}
