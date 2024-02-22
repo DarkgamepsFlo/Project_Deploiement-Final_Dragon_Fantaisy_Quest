@@ -1,0 +1,68 @@
+/* Assurez-vous que l'image est initialement invisible */
+.you-died {
+    opacity: 0;
+    z-index: 3; /* Assurez-vous que l'image est au-dessus des autres éléments si nécessaire */
+    position: absolute; /* Position absolue pour pouvoir contrôler facilement la position */
+    left: 30%; /* Déplacez l'image de 50% de la largeur de son conteneur */
+    top: -10%;
+    animation: enlarge 4s ease-in-out forwards 1s, fadeIn 4s ease-in-out forwards 1s; /* Animation d'agrandissement et d'opacité */
+    
+}
+
+.perso-you-died {
+    opacity: 0;
+    z-index: 3; /* Assurez-vous que l'image est au-dessus des autres éléments si nécessaire */
+    position: absolute; /* Position absolue pour pouvoir contrôler facilement la position */
+    left: 43%; /* Déplacez l'image de 50% de la largeur de son conteneur */
+    top: 58%;
+    animation: fadeIn 2s ease-in-out forwards 5s; /* Animation d'agrandissement et d'opacité */
+}
+
+/* Animation pour agrandir progressivement l'image YouDied */
+@keyframes enlarge {
+    0% {
+        transform: scale(0); /* Commencez à l'échelle 0 */
+    }
+    100% {
+        transform: scale(1.2); /* Terminez à l'échelle normale */
+    }
+}
+
+/* Animation pour afficher progressivement l'image */
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Commencez avec une opacité de 0 */
+    }
+    100% {
+        opacity: 1; /* Terminez avec une opacité de 1 */
+    }
+}
+
+.buttonRetry {
+    opacity: 0;
+    margin-top: 40%;
+    margin-left: 42%;
+    width: 350px;
+    z-index: 3;
+    position: absolute;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    font-family: 'Skranji', cursive;
+    color: #dbdbdb;
+    font-size: 26px;
+    font-weight: 400;
+    text-shadow: 0 1px 3px #000;
+    text-align: center;
+    padding: 10px 0;
+    background: linear-gradient(to bottom right, #000000, #202020);
+    border-top: 4px ridge #dbdbdb;
+    border-left: 4px groove #dbdbdb;
+    border-right: 4px ridge #dbdbdb;
+    border-bottom: 4px groove #dbdbdb;
+    animation: enlarge 3s ease-in-out forwards 4s, fadeIn 3s ease-in-out forwards 4s;
+}
+
+.buttonRetry:hover{
+    background: linear-gradient(to bottom right, #202020, #2b2b2b);
+    box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
+}

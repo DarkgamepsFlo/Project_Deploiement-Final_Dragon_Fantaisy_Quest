@@ -1,18 +1,21 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App !!!!!!!!!!!!!!!!!"/>
+  <!-- <HelloWorld msg="Welcome to Your Vue.js App !!!!!!!!!!!!!!!!!"/> -->
   <Message></Message>
+  <PointsDeVie></PointsDeVie>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue';
 import Message from './components/Message.vue';
+import PointsDeVie from './components/PointsDeVie.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    Message
+    // HelloWorld,
+    Message,
+    PointsDeVie
   }
 }
 </script>
