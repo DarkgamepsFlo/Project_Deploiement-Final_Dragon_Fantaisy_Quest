@@ -1,0 +1,11 @@
+.points-section {
+  position: absolute;
+  flex: 1;
+  margin: 10px;
+  padding: 10px;
+  bottom: 0;
+}
+
+.points-section img {
+  transform: scaleX(-1);
+}

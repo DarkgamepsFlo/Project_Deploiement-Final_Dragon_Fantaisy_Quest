@@ -1,0 +1,14 @@
+version: '3'
+services:
+  vue:
+    build:
+      context: ./final_dragon_fantaisy_quest_vuejs
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+  api:
+    build:
+      context: ./final_dragon_fantaisy_quest_nodejs
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
