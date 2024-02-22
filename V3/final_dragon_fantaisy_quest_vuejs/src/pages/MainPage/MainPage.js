@@ -8,20 +8,20 @@ import GameOver from '../GameOver/GameOver.vue';
 export default {
   data() {
     return {
-      DegatEnnemi: 0,
-      DegatJoueur: 0,
-      ImgEnnemi: "",
-      ImgJoueur: "",
-      ImgBaseEnnemi: "",
-      ImgBaseJoueur: "",
-      isAttackJoueur: null,
-      isAttackEnnemi: null,
-      isDamageJoueur: null,
-      isDamageEnnemi: null,
-      isGameOver: null,
-      isVictory: null,
-      isGameOverBase: null,
-      isVictoryBase: null
+      DegatEnnemi: 0, // Dégâts de l'ennemi
+      DegatJoueur: 0, // Dégâts du joueur
+      ImgEnnemi: "", // Image de l'ennemi
+      ImgJoueur: "", // Image du joueur
+      ImgBaseEnnemi: "", // Image de base de l'ennemi
+      ImgBaseJoueur: "", // Image de base du joueur
+      isAttackJoueur: null, // Si le joueur est en train d'attaquer
+      isAttackEnnemi: null, // Si l' ennemi est en train d'attaquer
+      isDamageJoueur: null, // Si le joueur subit des dégâts
+      isDamageEnnemi: null, // Si l'ennemi subit des dégâts
+      isGameOver: null, // Si c'est un game over pour le joueur
+      isVictory: null, // Si c'est une victoire pour le joueur
+      isGameOverBase: null, // variable permettant de faire disparaitre les éléments de la page de base lorsque la page game over s'affiche
+      isVictoryBase: null // variable permettant de faire disparaitre les éléments de la page de base lorsque la page victory s'affiche
     }
   },
   components: {
@@ -32,15 +32,18 @@ export default {
     GameOver
   },
   async mounted() {
+    // On va chercher l'ensemble des images disponibles pour chaque personnage grâce à l'API
     this.ImgEnnemi = await getImgService.getImgAPI("Ennemi", "Sephiroth");
     this.ImgJoueur = await getImgService.getImgAPI("Joueur", "Cloud");
 
+    // On défini la première image lorsqu'on démarre l'application
     this.ImgBaseEnnemi = this.ImgEnnemi.img_ennemi.img1 + ".gif";
     this.ImgBaseJoueur = this.ImgJoueur.img_joueur.img1 + ".gif";
   },
   methods: {
+    // Cette méthode permet d'envoyer un signal à un personnage pour attaquer l'autre
     handleDecrement(type, power) {
-      if (type === 'Joueur') {
+      if (type === 'Joueur') { // Variables adaptés pour le joueur
         this.DegatEnnemi = power;
         this.DegatJoueur = 0;
         this.isAttackJoueur = true;
@@ -50,7 +53,7 @@ export default {
         setTimeout(() => {
           this.isDamageJoueur = false; // Réinitialiser après 2 secondes
         }, 2000);
-      } else if (type === 'Ennemi') {
+      } else if (type === 'Ennemi') { // Variable adaptés pour l'ennemi
         this.DegatEnnemi = 0;
         this.DegatJoueur = power;
         this.isAttackEnnemi = true;
@@ -61,6 +64,7 @@ export default {
         }, 2000);
       }
     },
+    // Cette méthode permet de recharger l'image d'un personnage par rapport à son comportement (s'il attaque ou non)
     updateImg(newImg, player) {
       if(player == "Joueur"){
         if (newImg == 1){
@@ -78,11 +82,10 @@ export default {
         }
       }
     },
+    // Cette fonction permet de vérifier et d'afficher la page si le joueur gagne ou perd le combat
     endGamePage(type, victory = false){
-      console.log(type);
-      console.log(victory);
+      console.info(victory);
       if(type === "Joueur"){
-        console.log("Le joueur a perdu la Game");
         setTimeout(() => {
           this.isGameOver = true;
         }, 3000);
@@ -90,7 +93,6 @@ export default {
           this.isGameOverBase = true;
         }, 5000);
       } else if (type === "Ennemi"){
-        console.log("Le joueur a gagné la game");
         setTimeout(() => {
           this.isVictory = true;
         }, 4000);
