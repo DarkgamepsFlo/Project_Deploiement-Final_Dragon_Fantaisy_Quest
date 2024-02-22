@@ -1,0 +1,14 @@
+.app-container {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #ffffff;
+  background-image: url('../../assets/background.png');
+  background-size: cover;
+  background-position: bottom; /* Ajout de la propriété background-position */
+  height: 100vh; /* 100% de la hauteur de la fenêtre */
+  margin: 0;
+}
+  
+.points-de-vie-container {
+  display: flex;
+}

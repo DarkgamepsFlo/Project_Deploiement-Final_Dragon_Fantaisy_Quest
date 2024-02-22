@@ -1,0 +1,6 @@
+{ 
+    "decrement": "decrement", 
+    "Joueur": "Joueur", 
+    "damage": 0,
+    "isButtonDisabled": true
+}

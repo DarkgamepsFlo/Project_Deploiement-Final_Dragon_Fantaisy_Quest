@@ -1,0 +1,9 @@
+{ 
+    "pv": 42, 
+    "decrementer": { 
+        "decrement": "decrement", 
+        "Joueur": "Joueur", 
+        "damage": 8,
+        "isButtonDisabled": true
+    }
+}
