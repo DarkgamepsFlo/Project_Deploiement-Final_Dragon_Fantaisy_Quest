@@ -1,4 +1,9 @@
 version: '3'
+
+networks: 
+  RPG_deploiement:
+
+
 services:
   vue:
     build:
@@ -6,9 +11,29 @@ services:
       dockerfile: Dockerfile
     ports:
       - '8080:8080'
+    networks:
+      - RPG_deploiement 
   api:
+    depends_on:
+      - bdd
     build:
       context: ./final_dragon_fantaisy_quest_nodejs
       dockerfile: Dockerfile
     ports:
       - '3000:3000'
+    networks:
+      - RPG_deploiement 
+  bdd:
+    container_name: bdd_RPG
+    image: postgres 
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=MDP12345
+      - PGDATA=/data/postgres 
+    volumes: 
+      - ./postgres:/data/postgres 
+    networks: 
+      - RPG_deploiement 
+    ports: 
+      - '5432:5432'
+    restart: unless-stopped 
